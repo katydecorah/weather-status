@@ -1,0 +1,29 @@
+{
+  "currently": {
+    "time": 1493484960,
+    "summary": "Light Snow",
+    "icon": "snow",
+    "nearestStormDistance": 0,
+    "precipIntensity": 0.011,
+    "precipIntensityError": 0.003,
+    "precipProbability": 1,
+    "precipType": "snow",
+    "temperature": 27.33,
+    "apparentTemperature": 15.57,
+    "dewPoint": 25.88,
+    "humidity": 0.94,
+    "windSpeed": 15.11,
+    "windBearing": 21,
+    "visibility": 0.99,
+    "cloudCover": 0.58,
+    "pressure": 1018.11,
+    "ozone": 366.96
+  },
+  "minutely": {
+    "summary": "Light snow for the hour.",
+    "icon": "snow"
+  },
+  "flags": {
+    "units": "us"
+  }
+}

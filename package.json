@@ -1,0 +1,36 @@
+{
+  "name": "weather-status",
+  "version": "1.0.0",
+  "description": "Make your Slack status the weather forecast.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/katydecorah/weather-status.git"
+  },
+  "bugs": {
+    "url": "https://github.com/katydecorah/weather-status/issues"
+  },
+  "scripts": {
+    "test": "tape test/*.js",
+    "precommit": "lint-staged"
+  },
+  "author": "Katy DeCorah",
+  "license": "MIT",
+  "dependencies": {
+    "babel-eslint": "^8.2.3",
+    "dotenv": "^5.0.1",
+    "eslint": "^4.19.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.1.0",
+    "prettier": "^1.12.1",
+    "request": "^2.85.0",
+    "tape": "^4.9.0"
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "eslint",
+      "prettier --single-quote --write",
+      "git add"
+    ]
+  }
+}

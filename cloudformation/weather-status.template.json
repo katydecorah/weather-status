@@ -1,0 +1,164 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Parameters": {
+    "GitSha": {
+      "Type": "String",
+      "Description": "GitSha to deploy"
+    },
+    "DarkSkySecretKey": {
+      "Type": "String",
+      "Description": "A Dark Sky secret key to use for authentication"
+    },
+    "SlackAccessToken": {
+      "Type": "String",
+      "Description": "Access token from the Slack App"
+    },
+    "SlackUser": {
+      "Type": "String",
+      "Description": "The Slack user id to update their status"
+    },
+    "Lat": {
+      "Type": "String",
+      "Description": "Latitude of your location",
+      "Default": "43.0833231"
+    },
+    "Long": {
+      "Type": "String",
+      "Description": "Longitude of your location",
+      "Default": "-73.8712154"
+    }
+  },
+  "Resources": {
+    "WeatherStatusRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "Path": "/weather-status/",
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "CloudWatch",
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:*"
+                  ],
+                  "Resource": "arn:aws:logs:*:*:*"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "WeatherStatusFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Join": [
+              "",
+              [
+                "kdecorah-",
+                {
+                  "Ref": "AWS::Region"
+                }
+              ]
+            ]
+          },
+          "S3Key": {
+            "Fn::Join": [
+              "",
+              [
+                "weather-status/",
+                {
+                  "Ref": "GitSha"
+                },
+                ".zip"
+              ]
+            ]
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "WeatherStatusRole",
+            "Arn"
+          ]
+        },
+        "Environment": {
+          "Variables": {
+            "SlackAccessToken": {
+              "Ref": "SlackAccessToken"
+            },
+            "DarkSkySecretKey": {
+              "Ref": "DarkSkySecretKey"
+            },
+            "Lat": {
+              "Ref": "Lat"
+            },
+            "Long": {
+              "Ref": "Long"
+            },
+            "SlackUser": {
+              "Ref": "SlackUser"
+            }
+          }
+        },
+        "Description": "weather",
+        "Handler": "index.status",
+        "MemorySize": 128,
+        "Runtime": "nodejs6.10",
+        "Timeout": 300
+      }
+    },
+    "TriggerWeatherStatusFunctionEvery20Minutes": {
+      "Type": "AWS::Events::Rule",
+      "Properties": {
+        "Description": "Every 20 minutes",
+        "ScheduleExpression": "rate(20 minutes)",
+        "State": "ENABLED",
+        "Targets": [
+          {
+            "Arn": {
+              "Fn::GetAtt": [
+                "WeatherStatusFunction",
+                "Arn"
+              ]
+            },
+            "Id": "TriggerWeatherStatusFunctionEvery20Minutes"
+          }
+        ]
+      }
+    },
+    "TriggerWeatherStatusFunctionEvery20MinutesPermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "WeatherStatusFunction",
+            "Arn"
+          ]
+        },
+        "Principal": "events.amazonaws.com",
+        "SourceArn": {
+          "Fn::GetAtt": [
+            "TriggerWeatherStatusFunctionEvery20Minutes",
+            "Arn"
+          ]
+        }
+      }
+    }
+  }
+}

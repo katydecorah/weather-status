@@ -1,0 +1,30 @@
+{
+  "currently": {
+    "time": 1526040750,
+    "summary": "Clear",
+    "icon": "clear-day",
+    "nearestStormDistance": 119,
+    "nearestStormBearing": 168,
+    "precipIntensity": 0,
+    "precipProbability": 0,
+    "temperature": 51.28,
+    "apparentTemperature": 51.28,
+    "dewPoint": 35.02,
+    "humidity": 0.54,
+    "pressure": 1016.34,
+    "windSpeed": 7.88,
+    "windGust": 10.89,
+    "windBearing": 324,
+    "cloudCover": 0.17,
+    "uvIndex": 1,
+    "visibility": 10,
+    "ozone": 350.94
+  },
+  "minutely": {
+    "summary": "Clear for the hour.",
+    "icon": "clear-day"
+  },
+  "flags": {
+    "units": "si"
+  }
+}
