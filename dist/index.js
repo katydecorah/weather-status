@@ -8822,7 +8822,7 @@ function src_status() {
                 throw new Error(response.error);
             }
             else {
-                (0,core.info)(JSON.stringify(response));
+                (0,core.info)(`Updated status: ${response.profile.status_text}`);
             }
         }
         catch (error) {

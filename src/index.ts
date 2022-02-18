@@ -9,12 +9,15 @@ async function status() {
     const report = processWeather(weather);
     const response = (await updateSlackStatus(report)) as {
       ok: boolean;
-      error: string;
+      error?: string;
+      profile?: {
+        status_text?: string;
+      };
     };
     if (!response.ok) {
       throw new Error(response.error);
     } else {
-      info(JSON.stringify(response));
+      info(`Updated status: ${response.profile.status_text}`);
     }
   } catch (error) {
     setFailed(error.message);
