@@ -17,7 +17,7 @@ name: Weather status
 on:
   push:
   schedule:
-    - cron: "*/20 * * * *" # Every 20 minutes
+    - cron: "*/60 * * * *" # Every hour
 
 jobs:
   weather_update:
@@ -33,7 +33,6 @@ jobs:
           Longitude: ${{ secrets.Longitude }}
           DarkSkySecretKey: ${{ secrets.DarkSkySecretKey }}
           SlackAccessToken: ${{ secrets.SlackAccessToken }}
-          SlackUser: ${{ secrets.SlackUser }}
 ```
 
 ## Action options
@@ -45,7 +44,5 @@ jobs:
 - `DarkSkySecretKey`: Required. Your Dark Sky secrety key. Use a respository secret https://docs.github.com/en/actions/security-guides/encrypted-secrets
 
 - `SlackAccessToken`: Required. Your Slack access token. Use a respository secret https://docs.github.com/en/actions/security-guides/encrypted-secrets
-
-- `SlackUser`: Required. The Slack user that you want to update the status.
 
 <!-- END GENERATED DOCUMENTATION -->
