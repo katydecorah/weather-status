@@ -4,19 +4,44 @@
 
 Make your Slack status the weather forecast.
 
-## Set up
 
-Rename `.sample-env` to `.env`. In that file, add values for each parameter:
+<!-- START GENERATED DOCUMENTATION -->
 
-- `DarkSkySecretKey` - Create a [Dark Sky account](https://darksky.net/dev/) to retrieve a secret key.
-- `SlackAccessToken` - Create a [new app](https://api.slack.com/apps) to get an OAuth Access Token.
-- `SlackUser` - Your Slack `user`, can be retrieved through [users.list tester](https://api.slack.com/methods/users.list/test).
-- `Lat` - The latitude of the location where you want the weather forecast.
-- `Lon` - The longitude of the location where you want the weather forecast.
+## Set up the workflow
 
-## Run it
+To use this action, create a new workflow in `.github/workflows` and modify it as needed:
 
+```yml
+name: Weather status
+
+on:
+  schedule:
+    - cron: "*/60 * * * *" # Every hour
+
+jobs:
+  weather_update:
+    runs-on: macOS-latest
+    name: Weather
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Weather
+        uses: katydecorah/weather-status@v1.0.0
+        with:
+          Latitude: ${{ secrets.Latitude }}
+          Longitude: ${{ secrets.Longitude }}
+          DarkSkySecretKey: ${{ secrets.DarkSkySecretKey }}
+          SlackAccessToken: ${{ secrets.SlackAccessToken }}
 ```
-npm install
-node bin/weather-status.js
-```
+
+## Action options
+
+- `Latitude`: Required. The latitude of where you want to return the weather.
+
+- `Longitude`: Required. The longitude of where you want to return the weather.
+
+- `DarkSkySecretKey`: Required. Your Dark Sky secrety key. Use a respository secret https://docs.github.com/en/actions/security-guides/encrypted-secrets
+
+- `SlackAccessToken`: Required. Your Slack access token. Use a respository secret https://docs.github.com/en/actions/security-guides/encrypted-secrets
+
+<!-- END GENERATED DOCUMENTATION -->
