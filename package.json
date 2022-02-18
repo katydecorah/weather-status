@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Make your Slack status the weather forecast.",
   "main": "index.js",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git://github.com/katydecorah/weather-status.git"
@@ -11,26 +12,31 @@
     "url": "https://github.com/katydecorah/weather-status/issues"
   },
   "scripts": {
-    "test": "tape test/*.js",
-    "precommit": "lint-staged"
+    "pretest": "eslint . --ext .js,.ts",
+    "test": "jest",
+    "prepare": "husky install",
+    "build": "ncc build src/index.ts"
   },
   "author": "Katy DeCorah",
   "license": "MIT",
-  "dependencies": {
-    "babel-eslint": "^8.2.3",
-    "dotenv": "^5.0.1",
-    "eslint": "^4.19.1",
-    "husky": "^0.14.3",
-    "lint-staged": "^7.1.0",
-    "prettier": "^1.12.1",
-    "request": "^2.85.0",
-    "tape": "^4.9.0"
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-typescript": "^7.16.7",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "@vercel/ncc": "^0.33.3",
+    "eslint": "^8.9.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jest": "^26.1.1",
+    "husky": "^7.0.0",
+    "jest": "^27.5.1",
+    "prettier": "^2.5.1",
+    "pretty-quick": "^3.1.3",
+    "typescript": "^4.5.5"
   },
-  "lint-staged": {
-    "**/*.js": [
-      "eslint",
-      "prettier --single-quote --write",
-      "git add"
-    ]
-  }
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "node-fetch": "^3.2.0"
+  },
+  "homepage": "https://github.com/katydecorah/weather-status#readme"
 }

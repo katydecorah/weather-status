@@ -1,0 +1,22 @@
+name: Weather status
+description: Make your Slack status the weather forecast.
+runs:
+  using: node16
+  main: dist/index.js
+
+inputs:
+  Latitude:
+    description: The latitude of where you want to return the weather.
+    required: true
+  Longitude:
+    description: The longitude of where you want to return the weather.
+    required: true
+  DarkSkySecretKey:
+    description: Your Dark Sky secrety key. Use a respository secret https://docs.github.com/en/actions/security-guides/encrypted-secrets
+    required: true
+  SlackAccessToken:
+    description: Your Slack access token. Use a respository secret https://docs.github.com/en/actions/security-guides/encrypted-secrets
+    required: true
+  SlackUser:
+    description: The Slack user that you want to update the status.
+    required: true
