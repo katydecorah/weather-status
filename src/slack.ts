@@ -1,10 +1,9 @@
 import fetch from "node-fetch";
-import { getInput, info } from "@actions/core";
+import { getInput } from "@actions/core";
 import { Status } from "./process-weather";
 
 export default async function updateSlackStatus(profile: Status) {
   try {
-    info(JSON.stringify(profile));
     const response = await fetch(
       `https://slack.com/api/users.profile.set?token=${getInput(
         "SlackAccessToken"
@@ -12,7 +11,7 @@ export default async function updateSlackStatus(profile: Status) {
         "SlackUser"
       )}`
     );
-    await response.json();
+    return await response.json();
   } catch (error) {
     throw new Error(error);
   }
