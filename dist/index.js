@@ -8809,7 +8809,12 @@ function src_status() {
             const weather = yield getWeather();
             const report = processWeather(weather);
             const response = yield updateSlackStatus(report);
-            (0,core.info)(JSON.stringify(response));
+            if (!response.ok) {
+                throw new Error(response.error);
+            }
+            else {
+                (0,core.info)(JSON.stringify(response));
+            }
         }
         catch (error) {
             (0,core.setFailed)(error.message);
