@@ -19,4 +19,3 @@ jobs:
           Longitude: ${{ secrets.Longitude }}
           DarkSkySecretKey: ${{ secrets.DarkSkySecretKey }}
           SlackAccessToken: ${{ secrets.SlackAccessToken }}
-          SlackUser: ${{ secrets.SlackUser }}
