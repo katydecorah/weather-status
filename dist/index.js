@@ -8780,7 +8780,16 @@ var slack_awaiter = (undefined && undefined.__awaiter) || function (thisArg, _ar
 function updateSlackStatus(profile) {
     return slack_awaiter(this, void 0, void 0, function* () {
         try {
-            const response = yield fetch(`https://slack.com/api/users.profile.set?token=${(0,core.getInput)("SlackAccessToken")}&profile=${encodeURIComponent(JSON.stringify(profile))}&user=${(0,core.getInput)("SlackUser")}`);
+            const response = yield fetch(`https://slack.com/api/users.profile.set`, {
+                method: "post",
+                body: JSON.stringify({
+                    profile: profile,
+                }),
+                headers: {
+                    Authorization: `Bearer ${(0,core.getInput)("SlackAccessToken")}`,
+                    "Content-Type": "application/json",
+                },
+            });
             return yield response.json();
         }
         catch (error) {
@@ -8808,7 +8817,7 @@ function src_status() {
         try {
             const weather = yield getWeather();
             const report = processWeather(weather);
-            const response = yield updateSlackStatus(report);
+            const response = (yield updateSlackStatus(report));
             if (!response.ok) {
                 throw new Error(response.error);
             }
