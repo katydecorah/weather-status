@@ -8780,8 +8780,9 @@ var slack_awaiter = (undefined && undefined.__awaiter) || function (thisArg, _ar
 function updateSlackStatus(profile) {
     return slack_awaiter(this, void 0, void 0, function* () {
         try {
+            (0,core.info)(JSON.stringify(profile));
             const response = yield fetch(`https://slack.com/api/users.profile.set?token=${(0,core.getInput)("SlackAccessToken")}&profile=${encodeURIComponent(JSON.stringify(profile))}&user=${(0,core.getInput)("SlackUser")}`);
-            return yield response.json();
+            yield response.json();
         }
         catch (error) {
             throw new Error(error);
