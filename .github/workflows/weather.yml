@@ -1,6 +1,7 @@
 name: Weather status
 
 on:
+  push:
   schedule:
     - cron: "*/20 * * * *" # Every 20 minutes
 
