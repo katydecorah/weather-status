@@ -26,7 +26,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Weather
-        uses: katydecorah/weather-status@v1.0.0
+        uses: katydecorah/weather-status@v2.0.0
         with:
           Latitude: ${{ secrets.Latitude }}
           Longitude: ${{ secrets.Longitude }}
