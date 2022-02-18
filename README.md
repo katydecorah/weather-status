@@ -15,7 +15,6 @@ To use this action, create a new workflow in `.github/workflows` and modify it a
 name: Weather status
 
 on:
-  push:
   schedule:
     - cron: "*/60 * * * *" # Every hour
 
