@@ -8,6 +8,7 @@ export function processWeather(report: Weather): Status {
 }
 
 export function getIcon(icon: string) {
+  if (!icon) return ":question:";
   const icons = {
     "clear-day": ":sunny:",
     "clear-night": ":crescent_moon:",

@@ -8740,6 +8740,8 @@ function processWeather(report) {
     };
 }
 function getIcon(icon) {
+    if (!icon)
+        return ":question:";
     const icons = {
         "clear-day": ":sunny:",
         "clear-night": ":crescent_moon:",
