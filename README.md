@@ -24,7 +24,7 @@ jobs:
     name: Weather
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Weather
         uses: katydecorah/weather-status@v2.0.0
         with:
