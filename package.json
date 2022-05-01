@@ -37,7 +37,7 @@
     "typescript": "^4.6.3"
   },
   "dependencies": {
-    "@actions/core": "^1.6.0",
+    "@actions/core": "^1.7.0",
     "node-fetch": "^3.2.3"
   },
   "homepage": "https://github.com/katydecorah/weather-status#readme"
