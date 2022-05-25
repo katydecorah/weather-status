@@ -3,6 +3,7 @@ import clear from "./fixtures/clear.json";
 import rain from "./fixtures/rain.json";
 import snow from "./fixtures/snow.json";
 import si from "./fixtures/si.json";
+import noIcon from "./fixtures/no-icon.json";
 
 describe("processWeather", () => {
   test("clear", () => {
@@ -30,6 +31,13 @@ describe("processWeather", () => {
   test("si", () => {
     expect(processWeather(si)).toEqual({
       status_emoji: ":sunny:",
+      status_text: "Clear for the hour. 51℃",
+    });
+  });
+
+  test("no icon", () => {
+    expect(processWeather(noIcon)).toEqual({
+      status_emoji: ":question:",
       status_text: "Clear for the hour. 51℃",
     });
   });

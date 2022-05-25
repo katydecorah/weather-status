@@ -2,13 +2,14 @@ import { Weather } from "./get-weather";
 
 export function processWeather(report: Weather): Status {
   return {
-    status_emoji: getIcon(report.minutely.icon),
+    status_emoji: report.minutely.icon
+      ? getIcon(report.minutely.icon)
+      : ":question:",
     status_text: getMessage(report),
   };
 }
 
 export function getIcon(icon: string) {
-  if (!icon) return ":question:";
   const icons = {
     "clear-day": ":sunny:",
     "clear-night": ":crescent_moon:",
