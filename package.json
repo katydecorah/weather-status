@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@actions/core": "^1.8.2",
-    "node-fetch": "^3.2.5"
+    "node-fetch": "^3.2.6"
   },
   "homepage": "https://github.com/katydecorah/weather-status#readme"
 }
