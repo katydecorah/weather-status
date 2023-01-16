@@ -1,6 +1,9 @@
 import { Weather } from "./get-weather";
 
 export function processWeather(report: Weather): Status {
+  if (!report.minutely) {
+    throw new Error(`Missing minutely data.`);
+  }
   return {
     status_emoji: report.minutely.icon
       ? getIcon(report.minutely.icon)

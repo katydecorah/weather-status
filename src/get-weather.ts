@@ -80,10 +80,10 @@ export type Weather = {
   longitude: number;
   timezone: string;
   offset: number;
-  currently: Currently;
-  minutely: Interval;
-  hourly: Interval;
-  daily: Interval;
+  currently?: Currently;
+  minutely?: Interval;
+  hourly?: Interval;
+  daily?: Interval;
   flags: {
     sources: string[];
     "lamp-stations": string[];

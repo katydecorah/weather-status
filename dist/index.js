@@ -9899,6 +9899,9 @@ function getWeather() {
 
 ;// CONCATENATED MODULE: ./src/process-weather.ts
 function processWeather(report) {
+    if (!report.minutely) {
+        throw new Error(`Missing minutely data.`);
+    }
     return {
         status_emoji: report.minutely.icon
             ? getIcon(report.minutely.icon)
