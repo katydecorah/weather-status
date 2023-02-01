@@ -34,11 +34,13 @@ jobs:
           SlackAccessToken: ${{ secrets.SlackAccessToken }}
 ```
 
-
 ## Action options
 
 - `Latitude`: Required. The latitude of where you want to return the weather.
+
 - `Longitude`: Required. The longitude of where you want to return the weather.
+
 - `DarkSkySecretKey`: Required. Your Dark Sky secrety key. Use a respository secret https://docs.github.com/en/actions/security-guides/encrypted-secrets
+
 - `SlackAccessToken`: Required. Your Slack access token. Use a respository secret https://docs.github.com/en/actions/security-guides/encrypted-secrets
 <!-- END GENERATED DOCUMENTATION -->
